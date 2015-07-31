@@ -14,16 +14,19 @@ module VisualStudio
       },
       '12.0' => {
         'premium' => 'HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\DevDiv\vs\Servicing\12.0\premium\1033'
+      },
+      '14.0' => {
+        'enterprise' => 'HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\DevDiv\vs\Servicing\14.0\enterprise\1033'
       }
     }
-    
+
     def is_vs_installed?(version, edition)
       value = { name: 'Install', type: :dword, data: 1 }
       registry_key_exists?(@@key[version][edition]) and
       registry_value_exists?(@@key[version][edition], value) and
       registry_data_exists?(@@key[version][edition], value)
     end
-    
+
     def is_vs_sp_installed?(version, edition)
       value = { name: 'SP', type: :dword, data: 1 }
       registry_key_exists?(@@key[version][edition]) and
